@@ -13,9 +13,12 @@ import java.util.List;
  */
 public interface CollectingDvdsDao {
     
-    public void addDvd(Dvd newDvd);
-    public List<Dvd> getAllDvds();
-    public Dvd getDvdbyTitle(String title);
-    public Dvd removeDvd(String title);
+    public void addDvd(Dvd newDvd) throws CollectingDvdsDaoException;
+    public List<Dvd> getAllDvds()throws CollectingDvdsDaoException;
+    public Dvd getDvdbyTitle(String title) throws CollectingDvdsDaoException;
+    //public Dvd getDvdbyTitleAndDirector(String title, String year) throws CollectingDvdsDaoException;
+//    public int getNumOfDvdsWithSameTitle(String title) throws CollectingDvdsDaoException;
+    public boolean removeDvd(Dvd dvd) throws CollectingDvdsDaoException;
+   
     
 }

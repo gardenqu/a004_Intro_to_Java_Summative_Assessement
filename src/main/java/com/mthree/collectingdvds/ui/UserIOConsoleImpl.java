@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 
 public class UserIOConsoleImpl implements UserIO{
-    private final Scanner console = new Scanner(System.in);
+    private Scanner console = new Scanner(System.in);
 
     @Override
     public void print(String msg) {

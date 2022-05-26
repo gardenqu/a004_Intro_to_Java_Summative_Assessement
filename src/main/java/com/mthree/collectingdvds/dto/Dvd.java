@@ -10,19 +10,48 @@ package com.mthree.collectingdvds.dto;
  */
 public class Dvd {
       private String title;
-      private String contentRating;
-      private int releaseYear;
+      private String MPAArating;
+      private String releaseDate;
+      private String directorName;
+      private String studio;
+      private String userRating;
       
-      public Dvd(String title, int year){
+       public Dvd(String title,String director,String contentRating, String date,String studio,String rating){
           this.title=title;
-          this.releaseYear=year;
-          
+          this.directorName=director;
+          this.MPAArating=contentRating;
+          this.releaseDate=date; 
+          this.studio=studio;
+          this.userRating=rating;
       }
-      public Dvd(String title,String contentRating,int year){
-          this.title=title;
-          this.contentRating=contentRating;
-          this.releaseYear=year;  
-      }
+       
+
+    public String getDirectorName() {
+        return directorName;
+    }
+
+    public void setDirectorName(String directorName) {
+        this.directorName = directorName;
+    }
+
+    public String getStudio() {
+        return studio;
+    }
+
+    public void setStudio(String studio) {
+        this.studio = studio;
+    }
+
+    public String getUserRating() {
+        return userRating;
+    }
+
+    public void setUserRating(String userRating) {
+        this.userRating = userRating;
+    }
+      
+     
+     
 
     public String getTitle() {
         return title;
@@ -32,20 +61,20 @@ public class Dvd {
         this.title = title;
     }
 
-    public String getContentRating() {
-        return contentRating;
+    public String getMPAARating() {
+        return MPAArating;
     }
 
-    public void setContentRating(String contentRating) {
-        this.contentRating = contentRating;
+    public void setMPAARating(String contentRating) {
+        this.MPAArating = contentRating;
     }
 
-    public int getReleaseYear() {
-        return releaseYear;
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setReleaseYear(int releaseYear) {
-        this.releaseYear = releaseYear;
+    public void setReleaseDate(String release) {
+        this.releaseDate = release;
     }
      
       

@@ -5,11 +5,9 @@
 package com.mthree.collectingdvds.controller;
 
 import com.mthree.collectingdvds.dao.CollectingDvdsDao;
-import com.mthree.collectingdvds.dao.CollectingDvdsDaoFileImpl;
+import com.mthree.collectingdvds.dao.CollectingDvdsDaoException;
 import com.mthree.collectingdvds.dto.Dvd;
 import com.mthree.collectingdvds.ui.CollectingDvdsView;
-import com.mthree.collectingdvds.ui.UserIO;
-import com.mthree.collectingdvds.ui.UserIOConsoleImpl;
 import java.util.List;
 
 /**
@@ -17,15 +15,25 @@ import java.util.List;
  * @author nay
  */
 public class CollectingDvdsController {
-     private CollectingDvdsView view= new CollectingDvdsView();
-     private UserIO io = new UserIOConsoleImpl();
-     private CollectingDvdsDao dao = new CollectingDvdsDaoFileImpl();
- 
+    
+    
+     private final CollectingDvdsView view;
+     private final CollectingDvdsDao dao ;
+     
+     
+ public CollectingDvdsController(CollectingDvdsView v,CollectingDvdsDao d){
+     this.dao=d;
+     this.view=v;
+ }
 
-    public void run() {
+    public void run() throws CollectingDvdsDaoException {
         boolean keepGoing = true;
         int menuSelection=0;
-        while (keepGoing) {
+        
+        
+      
+        try{
+            while (keepGoing) {
          
           
            menuSelection = getMenuSelection();
@@ -38,20 +46,29 @@ public class CollectingDvdsController {
                     addingDvd();
                     break;
                 case 3:
-                    io.print("VIEW DVD");
+                    viewDvdByTitle();
                     break;
-                case 4:
-                    io.print("REMOVE DVD");
+                    
+                case 4:editDVD();
+                    
                     break;
                 case 5:
+                    removeDvd();
+                    break;
+
+                case 6:
                     keepGoing = false;
                     break;
                 default:
-                    io.print("UNKNOWN COMMAND");
+                    unknownCommand();
             }
-
+ 
         }
-        io.print("GOOD BYE");
+            exitMessage();
+        }catch(CollectingDvdsDaoException e){
+            view.displayErrorMessage(e.getMessage());
+        }
+               
     }
     
     
@@ -59,7 +76,7 @@ public class CollectingDvdsController {
         return view.printMenuAndGetSelection();
     }
     
-    private void addingDvd() {
+    private void addingDvd()throws CollectingDvdsDaoException {
     view.displayAddDvdBanner();
     Dvd newDvd = view.getNewDvdInfo();
     dao.addDvd(newDvd);
@@ -67,9 +84,80 @@ public class CollectingDvdsController {
 }
     
     
-    private void listDvds(){
+    private void listDvds()throws CollectingDvdsDaoException{
         view.displayDisplayAllBanner();
         List<Dvd> list=dao.getAllDvds();
         view.displayDvdList(list);
     }
+    
+    private void viewDvdByTitle()throws CollectingDvdsDaoException{
+        
+        String title=view.getDVDByName();
+        view.displayDisplayDvdBanner();
+        view.displayDVD(dao.getDvdbyTitle(title));
+        
+    }
+    
+    private void removeDvd()throws CollectingDvdsDaoException {
+       String title=view.getDVDByName();
+        Dvd selectedDvd=dao.getDvdbyTitle(title);
+        
+        view.displayRemoveResult(dao.removeDvd(selectedDvd));
+  
+       
+        
+
+    //view.displayRemoveResult(dao.removeDvd(dao.getDvdbyTitle(title)));
+    
 }
+    
+    private void editDVD()throws CollectingDvdsDaoException{
+        
+        view.displayEditedDVDBanner();
+        String title=view.getDVDByName();
+        Dvd selectedDvd=dao.getDvdbyTitle(title);
+        Dvd edited=view.editDVDresult(selectedDvd);
+        
+        if(edited != null){
+            dao.removeDvd(selectedDvd);
+            dao.addDvd(edited);
+            
+            
+            view.displayDVD(edited);
+        }else{
+            view.displayDVD(selectedDvd);
+        }
+        
+        
+        
+       
+        
+        
+    }
+    
+//    private Dvd returnDvdSelection()throws CollectingDvdsDaoException{
+//        Dvd selectedDVD;
+//        String title=view.getDVDByName();
+//        
+//        if(dao.getNumOfDvdsWithSameTitle(title)>1){
+//            String director=view.getDVDByDirector();
+//            selectedDVD=dao.getDvdbyTitleAndDirector(title, director);
+//        }else{
+//            selectedDVD= dao.getDvdbyTitle(title);
+//        }
+//        
+//        return selectedDVD;
+//    }
+    
+    private void unknownCommand() {
+    view.displayUnknownCommandBanner();
+}
+
+private void exitMessage() {
+    view.displayExitBanner();
+}
+
+
+}
+
+
