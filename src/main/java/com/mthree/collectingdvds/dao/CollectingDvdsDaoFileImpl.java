@@ -19,97 +19,143 @@ import java.util.Set;
 
 /**
  *
- * @author nay
+ * @author Quanayzia Garden
+ * Filename: CollectingDvdsDaoImpl.java
+ * Date: May 26,2022
+ * Class: a004 Intro To Java
+ * Description: 
+ * Implementation file for the Dao. Add the functionality to the defined methods. 
  */
+
+
 public class CollectingDvdsDaoFileImpl implements CollectingDvdsDao {
     private  List<Dvd> dvds=new ArrayList<>();
     public static final String COLLECTION_FILE = "DvdCollection.txt";
     public static final String DELIMITER = "#";
     
 
+    
+    
+/**
+ *Function: addDvd 
+ * 
+ * Description:
+ * adds a new DVD object to the list
+ *  
+ * @param newDvd
+ * @throws com.mthree.collectingdvds.dao.CollectingDvdsDaoException
+ */
     @Override
-    public void addDvd(Dvd newDvd) throws CollectingDvdsDaoException  {
-        
-        
+    public void addDvd(Dvd newDvd) throws CollectingDvdsDaoException  
+    {
         loadCollection();
-      
         dvds.add(newDvd);
         writeCollection();
  
     }
+    
+    
+    /**
+ *Function: getAllDvds
+ * 
+ * Description:
+ * Returns the list of DVDs
+ * 
+ * @return  List<Dvd>
+ * @throws com.mthree.collectingdvds.dao.CollectingDvdsDaoException
+ */
 
     @Override
     public List<Dvd> getAllDvds() throws CollectingDvdsDaoException {
         loadCollection();
         return dvds;
     }
+    
+    /**
+ *Function: getDvdbyTitle
+ * 
+ * Description:
+ *  Loops through the DVD list. Tries to match the title string with a DVD title. 
+ *  
+ * 
+ * @param title
+ * @return Dvd
+ * @throws com.mthree.collectingdvds.dao.CollectingDvdsDaoException
+ */
 
     @Override
-    public Dvd getDvdbyTitle(String title) throws CollectingDvdsDaoException {
+    public Dvd getDvdbyTitle(String title) throws CollectingDvdsDaoException 
+    {
          loadCollection();
-       for(Dvd dvd: dvds){
-           if(dvd.getTitle().equals(title)){
+       for(Dvd dvd: dvds)
+       {
+           if(dvd.getTitle().equals(title))
+           {
                return dvd;
-         
            }
            
        }
        return null;
     }
     
-//    @Override
-//    public int getNumOfDvdsWithSameTitle(String title) throws CollectingDvdsDaoException{
-//      
-//        
-//        int dvdCount=0;
-//        for (Dvd dvd : dvds) {
-//            if(dvd.getTitle().equals(title)){
-//                loadCollection();
-//                dvdCount++;
-//            }
-//        }
-//        return dvdCount;
-        
-    //}
-//    @Override
-//    public Dvd getDvdbyTitleAndDirector(String title, String director) throws CollectingDvdsDaoException{
-//         
-//        for(int i=0;i<dvds.size();i++){
-//           if(dvds.get(i).getTitle().equals(title) && dvds.get(i).getDirectorName().equals(director)){
-//               loadCollection();
-//               return dvds.get(i);
-//           }
-//           
-//       }
-//         return null;
-//    }
-    
+/**
+ *Function: removeDvd
+ * 
+ * Description:
+ * removes the DVD from the list of DVDs. returns true if the DVD is removed. Returns false if it has not
+ *  
+ * 
+ * @param dvd
+ * @return  bool
+ * @throws com.mthree.collectingdvds.dao.CollectingDvdsDaoException
+ */
        
     @Override
-    public boolean removeDvd(Dvd dvd) throws CollectingDvdsDaoException {
-                //loadCollection();
-                
-                
+    public boolean removeDvd(Dvd dvd) throws CollectingDvdsDaoException 
+    {
+              
                 boolean bool =dvds.remove(dvd);
-                
-               
+          
                 writeCollection();
                 return bool;
                 
                 
 
     }
-    private Dvd unmarshallDvd(String text){
-        
-        String[] fileDvd=text.split(DELIMITER);
-        //String fileDvd = DvdTokens[0];
     
+    
+    /**
+ *Function: unmarshallDvd 
+ * 
+ * Description:
+ * Breaks a string via delimiters into a string array. Uses the string array to create a DVD object and return it. 
+ *  
+ * @param text
+ * 
+ */
+    
+    private Dvd unmarshallDvd(String text)
+    {
+       
+        String[] fileDvd=text.split(DELIMITER);
+        
+    // creates DVD object
         Dvd dvdFromFile = new Dvd(fileDvd[0],fileDvd[1],fileDvd[2],fileDvd[3],fileDvd[4],fileDvd[5]);
         
         
         return dvdFromFile;
         
     }
+    
+    /**
+ *Function: loadCollection
+ * 
+ * Description:
+ * reads the file line by line. That data is unmarshalled and return as a DVD. the DVD is stored into a Set then into a List. 
+ *  The scanner is closes once all the objects have been created and stored into a list. 
+ * 
+ * @throws com.mthree.collectingdvds.dao.CollectingDvdsDaoException
+ */
     
     private void loadCollection() throws CollectingDvdsDaoException{
         Scanner scanner;
@@ -126,22 +172,21 @@ public class CollectingDvdsDaoFileImpl implements CollectingDvdsDao {
     
     
     String currentLine;
-    
-    
+    // creats a Set that will be used to store the DVD objects. this is done to prevent dubplicate objects from being stored. 
     Set<Dvd> hold= new HashSet<>();
    
     Dvd currentDvd;
     
-    while (scanner.hasNextLine()) {
+    while (scanner.hasNextLine()) 
+    {
         // get the next line in the file
         currentLine = scanner.nextLine();
         //System.out.println(currentLine);
         // unmarshall the line into a Dvd
         currentDvd=unmarshallDvd(currentLine);
-        
-        
+      // DVD is first stored in a Set
         hold.add(currentDvd);
-        
+       // Then the DVD are places stored in a list
         dvds=new ArrayList(hold);
         
         
@@ -151,6 +196,18 @@ public class CollectingDvdsDaoFileImpl implements CollectingDvdsDao {
     
     }
     
+    
+    /**
+ *Function: marshallDvd 
+ * 
+ * Description:
+ *  Takes the DVD information and stored it in a string with delimters added to it
+ * 
+ *  
+ * @param aDvd
+ * @return String
+ * @throws com.mthree.collectingdvds.dao.CollectingDvdsDaoException
+ */
     private String marshallDvd(Dvd aDvd){
         String DvdAsText = aDvd.getTitle() + DELIMITER;
         DvdAsText += aDvd.getDirectorName() + DELIMITER;
@@ -161,6 +218,16 @@ public class CollectingDvdsDaoFileImpl implements CollectingDvdsDao {
         return  DvdAsText;
         
     }
+    
+    /**
+ *Function: writeCollection
+ * 
+ * Description:
+ * Writes the DVD information to a file to be stored. Then closes the connection to the file. 
+ *  
+ * 
+ * @throws com.mthree.collectingdvds.dao.CollectingDvdsDaoException
+ */
     
     private void writeCollection() throws CollectingDvdsDaoException {
         PrintWriter out;

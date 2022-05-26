@@ -6,8 +6,14 @@ package com.mthree.collectingdvds.dto;
 
 /**
  *
- * @author nay
- */
+ * @author Quanayzia Garden
+ * Filename: Dvd.java
+ * Date: May 26,2022
+ * Class: a004 Intro To Java
+ * Description: 
+ * the Model : model comprises all the components in the application that deal with representing and storing data. Many of the function are getter/setter
+ * functions that allow the object information to stored or retrieved  without having direct access to the member variables 
+ * */
 public class Dvd {
       private String title;
       private String MPAArating;
@@ -15,6 +21,24 @@ public class Dvd {
       private String directorName;
       private String studio;
       private String userRating;
+      
+      
+      
+      
+       /**
+ *Function: Dvd
+ * 
+ * Description:
+ *  constructor that initializes the title,director,MPAA rating,date,studio,and user rating. 
+ *  
+ *
+     * @param title
+     * @param director
+     * @param contentRating
+     * @param date
+     * @param studio
+     * @param rating
+ */
       
        public Dvd(String title,String director,String contentRating, String date,String studio,String rating){
           this.title=title;

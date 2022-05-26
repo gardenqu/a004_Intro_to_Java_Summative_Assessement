@@ -9,15 +9,21 @@ import java.util.List;
 
 /**
  *
- * @author nay
+ * @author Quanayzia Garden
+ * Filename: CollectingDvdsDao.java
+ * Date: May 26,2022
+ * Class: a004 Intro To Java
+ * Description: 
+ * The Dao ( Data access object) interface : classes that handle retrieving and storing the data
  */
 public interface CollectingDvdsDao {
+    
+    
+   
     
     public void addDvd(Dvd newDvd) throws CollectingDvdsDaoException;
     public List<Dvd> getAllDvds()throws CollectingDvdsDaoException;
     public Dvd getDvdbyTitle(String title) throws CollectingDvdsDaoException;
-    //public Dvd getDvdbyTitleAndDirector(String title, String year) throws CollectingDvdsDaoException;
-//    public int getNumOfDvdsWithSameTitle(String title) throws CollectingDvdsDaoException;
     public boolean removeDvd(Dvd dvd) throws CollectingDvdsDaoException;
    
     

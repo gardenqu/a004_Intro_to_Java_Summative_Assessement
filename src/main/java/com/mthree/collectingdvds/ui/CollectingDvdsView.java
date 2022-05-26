@@ -9,18 +9,51 @@ import java.util.List;
 
 /**
  *
- * @author nay
+ * @author Quanayzia Garden
+ * Filename: CollectingDvdsView.java
+ * Date: May 26,2022
+ * Class: a004 Intro To Java
+ * Description: 
+ *The View: Responsible for interacting with the UI. No other component in the application is allowed to interact with the user 
  */
+
+
+
+
 public class CollectingDvdsView {
 
     private UserIO io;
 
-    public CollectingDvdsView(UserIO io) {
+    
+     /**
+ *Function: CollectindDvdsView  
+ * 
+ * Description:
+ *  This a constructor that initializes the UserIO
+ * 
+ *@param io  
+ * 
+ */
+    public CollectingDvdsView(UserIO io) 
+    {
         this.io = io;
 
     }
 
-    public int printMenuAndGetSelection() {
+   
+    
+    
+ /**
+ * Function:  printMenuAndGetSelection
+ * 
+ * Description:
+ *  Prints the menu for the user to see and allows the user to select from the menu 
+ * 
+ * @return int 
+ *        
+ */
+    public int printMenuAndGetSelection() 
+    {
         io.print("Main Menu");
         io.print("1. List DVDs");
         io.print("2. Add DVD to collection");
@@ -32,8 +65,24 @@ public class CollectingDvdsView {
         return io.readInt("Please select from the"
                 + " above choices.", 1, 6);
     }
+    
+    
+    
+    
+ /**
+ * Function:  getNewDvdInfo
+ * 
+ * Description:
+ *  Asks the user to input information about the DVD and uses that information to create a Dvd object
+ * 
+ * @param: none 
+ * 
+ * @return Dvd 
+ *        
+ */
 
-    public Dvd getNewDvdInfo() {
+    public Dvd getNewDvdInfo() 
+    {
         String title = io.readString("Please enter movie title");
         String director = io.readString("Please enter the movie director ");
         String MPAARating = io.readString("Please enter in movie MPAA rating");
@@ -46,20 +95,52 @@ public class CollectingDvdsView {
         return newDvd;
 
     }
-
-    public void displayAddDvdBanner() {
+    
+    /**
+ * Function:  displayAddDvdBanner
+ * 
+ * Description:
+ *  Displays a banner for the user to see 
+ *
+ *        
+ */
+    public void displayAddDvdBanner() 
+    {
         io.print("=== Add DVD ===");
     }
+    
+    /**
+ * Function:  displayAddSuccessBanner
+ * 
+ * Description:
+ *  Displays a banner for the user to see 
+ *
+ *        
+ */
 
     public void displayAddSuccessBanner() {
         io.readString(
-                "Dvd successfully Added.  Please hit enter to continue");
+                "DVD successfully Added.  Please hit enter to continue");
     }
+    
+    
+    /**
+ * Function:  displayDvdList
+ * 
+ * Description:
+ *  Displays a list of Dvds to the user
+ *
+ * @param dvdList
+ * 
+ *        
+ */
 
-    public void displayDvdList(List<Dvd> dvdList) {
+    public void displayDvdList(List<Dvd> dvdList) 
+    {
 
-        for (Dvd dvd : dvdList) {
-            String dvdInfo = String.format("#%s: %s, %s, %s %s, %s",
+        for (Dvd dvd : dvdList) 
+        {
+            String dvdInfo = String.format("#%s: %s, %s, %s, %s, %s",
                     dvd.getTitle(),
                     dvd.getDirectorName(),
                     dvd.getMPAARating(),
@@ -73,27 +154,56 @@ public class CollectingDvdsView {
         io.readString("Please hit enter to continue.");
 
     }
-
-    public void displayDisplayAllBanner() {
+    
+/**
+ * Function:  displayDisplayAllBanner
+ * Description:
+ *  Displays a banner for the user to see 
+ *
+ *        
+ */
+    public void displayDisplayAllBanner() 
+    {
         io.print("=== Display All DVDs ===");
     }
-
+    
+    
+/**
+ * Function:  displayDisplayDvdBanner
+ * Description:
+ *  Displays a banner for the user to see 
+ */
     public void displayDisplayDvdBanner() {
         io.print("=== Display DVD ===");
     }
-
-    public String getDVDByName() {
+/**
+ * Function:  getDVDByName
+ * Description:
+ *  Prompts the user to enter in a Dvd title then returns the user input as a string
+ *
+ *        
+ * @return String 
+ */
+    public String getDVDByName() 
+    {
         return io.readString("Please enter the DVD title.");
 
     }
+    
+ /**
+ * Function:  displayDVD
+ * Description:
+ * Displays information for a specified DVD to the user. If the DVD is not found it will notify the user
+ *
+ *        
+ * @param dvd
+ */
 
-    public String getDVDByDirector() {
-        return io.readString("Please enter the name of the  movie director.");
-    }
+    public void displayDVD(Dvd dvd) 
+    {
 
-    public void displayDVD(Dvd dvd) {
-
-        if (dvd != null) {
+        if (dvd != null)
+        {
 
             String dvdInfo = String.format("#%s: %s, %s, %s %s, %s",
                     dvd.getTitle(),
@@ -104,38 +214,63 @@ public class CollectingDvdsView {
                     dvd.getUserRating());
 
             io.print(dvdInfo);
-//        io.print(dvd.getTitle());
-//        io.print(dvd.getDirectorName());
-//        io.print(dvd.getMPAARating());
-//        io.print(dvd.getReleaseDate());
-//        io.print(dvd.getStudio());
-//        io.print(dvd.getUserRating());
             io.print("");
         } else {
             io.print("DVD is not in the List.");
         }
         io.readString("Please hit enter to continue.");
     }
-
+/**
+ * Function:  displayRemoveDVDBanner
+ * Description:
+ *  Displays a banner for the user to see 
+ */
     public void displayRemoveDVDBanner() {
         io.print("=== Remove Dvd ===");
     }
+    
+    /**
+ * Function:  displayRemoveResult
+ * Description:
+ * Lets the user know if the specified DVD was removed from the list. If it is not then the DVD was not in the list
+ *
+ *        
+ * @param dvd
+ */
 
-    public void displayRemoveResult(boolean dvd) {
+    public void displayRemoveResult(boolean dvd) 
+    {
         
-        if (dvd) {
+        if (dvd) 
+        {
             io.print("DVD successfully removed.");
         } else {
             io.print("DVD is not in list.");
         }
         io.readString("Please hit enter to continue.");
     }
-
-    public Dvd editDVDresult(Dvd dvd) {
+    
+    
+    
+    
+     /**
+ * Function:  editDVDResults
+ * Description:
+ * If the Dvd specified by the user is in the list this function will allow the user to edit that Dvd. It allows the user to 
+ * to use a menu to select what they would like to change and prompts them for input. That input is then stored used the Dvds setter functions. 
+ *
+ *        
+ * @param dvd
+ * @return Dvd
+ */
+    public Dvd editDVDResult(Dvd dvd) 
+    {
         boolean exit = false;
 
-        if (dvd != null) {
-            while (!exit) {
+        if (dvd != null) 
+        {
+            while (!exit) 
+            {
                 int selection = displayEditMenu();
 
                 switch (selection) {
@@ -187,8 +322,21 @@ public class CollectingDvdsView {
         return null;
 
     }
-
-    public int displayEditMenu() {
+    
+    
+    
+    
+     /**
+ * Function:  displayEditMenu
+ * Description:
+ * Prints the menu for the user to see and allows the user to select from the menu 
+ *
+ *        
+ *
+ * @return int 
+ */
+    public int displayEditMenu() 
+    {
         io.print("1). Edit the Title");
         io.print("2). Edit the Release date");
         io.print("3). Edit the MPAA rating");
@@ -202,19 +350,42 @@ public class CollectingDvdsView {
 
     }
 
-    public void displayEditedDVDBanner() {
-        io.print("===Dvd Edited ===");
+    /**
+ * Function:  displayEditedDvdBanner
+ * Description:
+ *  Displays a banner for the user to see 
+ */
+    public void displayEditingDVDBanner() 
+    {
+        io.print("===DVD Editing ===");
     }
+    /**
+ * Function:  displayDisplayExitBanner
+ * Description:
+ *  Displays a banner for the user to see 
+ */
 
-    public void displayExitBanner() {
+    public void displayExitBanner() 
+    {
         io.print("Good Bye!!!");
     }
-
-    public void displayUnknownCommandBanner() {
+/**
+ * Function:  displayUnknownCommandBanner
+ * Description:
+ *  Displays a banner for the user to see 
+ */
+    public void displayUnknownCommandBanner() 
+    {
         io.print("Unknown Command!!!");
     }
-
-    public void displayErrorMessage(String errorMsg) {
+/**
+ * Function:  displayErrorMessage
+ * Description:
+ *  prints out an Error message when a user inputs a incorrect value 
+ * @param errorMsg
+ */
+    public void displayErrorMessage(String errorMsg)
+    {
         io.print("=== ERROR ===");
         io.print(errorMsg);
     }

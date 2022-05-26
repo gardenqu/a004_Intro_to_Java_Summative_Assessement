@@ -6,7 +6,12 @@ package com.mthree.collectingdvds.dao;
 
 /**
  *
- * @author nay
+ * @author Quanayzia Garden
+ * Filename: CollectingDvdsDao.java
+ * Date: May 26,2022
+ * Class: a004 Intro To Java
+ * Description: 
+ * Exceptions handling class for the Dao
  */
 public class CollectingDvdsDaoException extends Exception {
     

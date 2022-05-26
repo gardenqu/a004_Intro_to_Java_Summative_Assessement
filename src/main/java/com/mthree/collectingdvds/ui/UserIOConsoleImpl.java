@@ -7,7 +7,12 @@ package com.mthree.collectingdvds.ui;
 
 /**
  *
- * @author nay
+ * @author Quanayzia Garden
+ * Filename: UserIOConsoleImpl.java
+ * Date: May 26,2022
+ * Class: a004 Intro To Java
+ * Description: 
+ * Class that implements the UserIo interface. Add functionality to the methods defined in the interface. 
  */
 
 import java.util.Scanner;
@@ -16,57 +21,35 @@ import java.util.Scanner;
 
 public class UserIOConsoleImpl implements UserIO{
     private Scanner console = new Scanner(System.in);
+    
+    
+    
+    /**
+ *Function: print
+ * 
+ * Description:
+ * prints out a string message
+ *  
+ * 
+     * @param msg
+ */
 
     @Override
     public void print(String msg) {
         System.out.println(msg);
         
     }
-
-    @Override
-    public double readDouble(String prompt) {
-        while (true) {
-            try {
-                return Double.parseDouble(this.readString(prompt));
-            } catch (NumberFormatException e) {
-                this.print("Input error. Please try again.");
-            }
-        }
-        
-    }
-
-    @Override
-    public double readDouble(String prompt, double min, double max) {
-        double result;
-        do {
-            result = readDouble(prompt);
-        } while (result < min || result > max);
-        return result;
-        
-        
-    }
-
-    @Override
-    public float readFloat(String prompt) {
-        while (true) {
-            try {
-                return Float.parseFloat(this.readString(prompt));
-            } catch (NumberFormatException e) {
-                this.print("Input error. Please try again.");
-            }
-        }
-    }
-
-    @Override
-    public float readFloat(String prompt, float min, float max) {
-          float result;
-        do {
-            result = readInt(prompt);
-        } while (result < min || result > max);
-
-        return result;
-       
-    }
+    
+ /**
+ *Function: print
+ * 
+ * Description:
+ * prints message. uses returned input and converts it into an integer then returns the value. If input is invalid it return an error message 
+ *  
+ * 
+     * @param prompt
+     * @return int
+ */
 
     @Override
     public int readInt(String prompt) {
@@ -74,11 +57,11 @@ public class UserIOConsoleImpl implements UserIO{
         int num = 0;
         while (invalidInput) {
             try {
-                // print the message msgPrompt (ex: asking for the # of cats!)
+              
                 String stringValue = this.readString(prompt);
-                // Get the input line, and try and parse
-                num = Integer.parseInt(stringValue); // if it's 'bob' it'll break
-                invalidInput = false; // or you can use 'break;'
+               
+                num = Integer.parseInt(stringValue); 
+                invalidInput = false; 
             } catch (NumberFormatException e) {
                 // If it explodes, it'll go here and do this.
                 this.print("Input error. Please try again.");
@@ -87,9 +70,24 @@ public class UserIOConsoleImpl implements UserIO{
         return num;
         
     }
+    
+    
+     /**
+ *Function: readInt
+ * 
+ * Description:
+ *  This function prompts the user and takes the return input and checks if it between the min and max values. 
+ *  
+ * 
+ * @param prompt
+ * @param min
+ * @param max
+ * @return int  
+ */
 
     @Override
-    public int readInt(String prompt, int min, int max) {
+    public int readInt(String prompt, int min, int max) 
+    {
                 int result;
         do {
             result = readInt(prompt);
@@ -97,32 +95,24 @@ public class UserIOConsoleImpl implements UserIO{
 
         return result;
     }
+    
+    
+     /**
+ *Function: readString
+ * 
+ * Description:
+ * prints out the param string to the console and returns a new line. 
+ * 
+ *  
+ * 
+ * @param prompt
+ * @return 
+ */
 
+  
     @Override
-    public long readLong(String prompt) {
-         while (true) {
-            try {
-                return Long.parseLong(this.readString(prompt));
-            } catch (NumberFormatException e) {
-                this.print("Input error. Please try again.");
-            }
-        }
-        
-    }
-
-    @Override
-    public long readLong(String prompt, long min, long max) {
-         long result;
-        do {
-            result = readLong(prompt);
-        } while (result < min || result > max);
-
-        return result;
-        
-    }
-
-    @Override
-    public String readString(String prompt) {
+    public String readString(String prompt) 
+    {
         System.out.println( prompt);
         return console.nextLine();
         

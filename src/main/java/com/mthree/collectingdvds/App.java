@@ -15,9 +15,28 @@ import com.mthree.collectingdvds.ui.UserIOConsoleImpl;
 
 /**
  *
- * @author nay
+ * @author Quanayzia Garden
+ * Filename: App.java
+ * Date: May 26,2022
+ * Class: a004 Intro To Java
+ * Description: 
+ * This application allows the user to add,edit,and delete Dvds in a collection. 
  */
 public class App {
+    
+    /**
+ *Function: main  
+ * 
+ * Description: The main function is the first method that gets invoked.This main function is used
+ to initialize the USERIO and the CollectingDvdsDao interfaces as well as to intitialize  the CollectingDvdsView and the CollectingDvdsController classes. It also runs the controllers run method to start up the functionality of the application. 
+ * 
+ *@param args  
+ * 
+ * @throws com.mthree.collectingdvds.dao.CollectingDvdsDaoException 
+ * 
+ * 
+ * 
+ */
 
     public static void main(String[] args) throws CollectingDvdsDaoException {
         UserIO myIo = new UserIOConsoleImpl();

@@ -6,28 +6,18 @@ package com.mthree.collectingdvds.ui;
 
 /**
  *
- * @author nay
+ * @author Quanayzia Garden
+ * Filename: UserIO.java
+ * Date: May 26,2022
+ * Class: a004 Intro To Java
+ * Description: 
+ * The interface for the UI. Alow for user to interact with the application. 
  */
 public interface UserIO {
     
     void print(String msg);
-
-    double readDouble(String prompt);
-
-    double readDouble(String prompt, double min, double max);
-
-    float readFloat(String prompt);
-
-    float readFloat(String prompt, float min, float max);
-
     int readInt(String prompt);
-
     int readInt(String prompt, int min, int max);
-
-    long readLong(String prompt);
-
-    long readLong(String prompt, long min, long max);
-
     String readString(String prompt);
 }
    
